@@ -3,10 +3,11 @@ var rp = require('request-promise');
 var items = require('./items');
 var router = express.Router();
 var async = require('async');
+var config = require('../config/config');
 
 const headers = {
-    'X-App-Id': '40d652b3-152f-40fb-8ec2-3fb8ee16b5cb',
-    'X-App-Token': 'a82abad0-2520-4a3c-bb85-c404f9f1a782'
+    'X-App-Id': config.appId,
+    'X-App-Token': config.appToken
 };
 const apiRoot = 'https://api.voucherify.io/v1/vouchers/';
 
@@ -16,7 +17,7 @@ router.post('/referrer', function (req, res) {
         method: 'POST',
         headers: headers,
         body: {
-            campaign: 'Example referral campaign',
+            campaign: config.campaign,
             customer: {
                 source_id: req.body.email,
                 email: req.body.email,
